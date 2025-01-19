@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Youtube.com Clone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+  p{
+  font-family: Roboto,Arial;
+  margin-top: 0;
+  margin-bottom: 0;
+  }
+  body{
+    margin:0;
+    padding-top: 80px;
+    padding-left: 100px;
+    padding-right: 24px;
+    background-color: rgb(248, 248, 248);
+  }
+
+  .header{
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border-bottom-width: 1px ;
+    border-bottom-style: solid ;
+    border-bottom-color: rgb(240, 240, 240);
+    z-index: 100;
+  }
+  .left-section{
+    
+    
+    display: flex;
+    align-items: center;
+  }
+  .middle-section{
+    
+    flex: 1;
+    margin-left: 70px;
+    margin-right: 30px;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+  
+  }
+  .right-section{
+    
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+  .thumbnail {
+    width: 100%;
+    
+    
+  }
+ 
+  
+  .video-title{
+    margin-top: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-bottom: 10px;
+
+  }
+ 
+ 
+  .profile-pic{
+    width: 36px;
+    border-radius: 40px;
+  }
+  .thumbnail-row{
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .video-author,        
+  .video-stats{
+    font-size: 12px;
+    color: rgb(96, 96, 96);
+  }
+  .video-author{
+    margin-bottom: 4px;
+  }
+  .video-info-grid{
+    display: grid;
+    grid-template-columns: 50px 1fr;
+  }
+  .video-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 16px;
+    row-gap: 40px;
+  }
+  @media (max-width: 750px) {
+    .video-grid{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+ @media (min-width: 1000px){
+   .video-grid{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+   }
+ }
+
+  .hamburger-menu{
+    height: 24px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+  }
+  .youtube-logo{
+    height: 20px;
+  }
+  .search-button{
+    height: 39px;
+    width: 60px;
+    background-color: rgb(240, 240, 240);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    margin-left: -1px;
+    margin-right: 10px;
+    
+  }
+  .search-button,
+  .voice-search,.upload-icon-container,.app-container,.noti
+  {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  
+
+  }
+  
+  .search-button .tooltip ,
+  .voice-search .tooltip , 
+  .upload-icon-container .tooltip,
+  .app-container .tooltip,
+  .noti .tooltip{
+    font-family: Roboto,Arial;
+    position: absolute;
+    background-color: gray;
+    color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 2px;
+    font-size: 12px;
+    bottom: -20;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+    white-space: nowrap;
+
+  }
+ 
+  .search-button:hover .tooltip,
+  .voice-search:hover .tooltip,
+  .upload-icon-container:hover .tooltip,
+  .app-container:hover .tooltip,
+  .noti:hover .tooltip{
+    opacity: 1;
+  }
+  .voice-search{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(245, 245, 245);
+
+
+  }
+  .search-bar{
+    flex: 1;
+    height: 36px;
+    padding-left: 10px;
+    font-size: 16px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    border-radius: 2px;
+    box-shadow: inset 1px 2px 3px rgba(0,0,0,0.05);
+    width: 0;
+  }
+  .search-bar::placeholder{
+    font-family: Roboto,arial;
+    font-size: 16px;
+  }
+  .search-icon{
+    height: 25px;
+    
+    
+  }
+  .voice-search-icon{
+    height: 24px;
+    
+
+   
+   
+  }
+  .upload-icon{
+    height: 24px;
+  }
+  .youtube-apps-icon{
+    height: 24px;
+  }
+  .notifications-icon{
+    height: 24px;
+  }
+  .current-user-icon{
+    height: 32px;
+    border-radius: 16px;
+  }
+  .sidebar{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top:55px ;
+    background-color: white;
+    width: 72px;
+    z-index: 200;
+    padding-top: 5px;
+
+  }
+  .sidebar-link{
+    
+    height: 105px;
+    margin-bottom: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .sidebar-link:hover{
+    background-color: rgb(236, 236, 236);
+  }
+  .sidebar-link img{
+    height: 30px;
+    margin-bottom: 4px;
+  }
+  .sidebar-link div{
+    font-family: Roboto,Arial;
+    font-size: 10px;
+  }
+  .video-time{
+    font-family: Roboto,Arial;
+    font-size: 12px;
+    font-weight: 500;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    bottom: 8px;
+    right: 5px;
+    border-radius: 2px;
+
+
+  }
+  .notifications-icon-container{
+    position: relative;
+  }
+  .notifications-count{
+    position: absolute;
+    top: -2px;
+    right: -5px;
+    background-color: rgb(201, 0, 0);
+    color: white;
+    font-family: Roboto,Arial;
+    font-size: 11px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 10px;
+  }
+  
+    </style>
+    
+
+  </head>
+  <body>
+    <div class="header">
+    <div class="left-section"><img class="hamburger-menu" src="icons/hamburger-menu.svg">
+    <img class="youtube-logo" src="icons/youtube-logo.svg"> </div>
+    <div class="middle-section">
+      <input class="search-bar" type ="text" placeholder="Search">
+      <button class="search-button"><img class="search-icon" src="icons/search (1).svg">
+      <div class="tooltip">Search</div></button>
+      <button class="voice-search"><img class="voice-search-icon" src="icons/voice-search-icon.svg">
+      <div class="tooltip">Search with your voice</div></button>
+    </div>
+    <div class="right-section">
+      <div class="upload-icon-container">
+        <img class="upload-icon" src="icons/upload.svg">
+        <div class="tooltip">Create</div>
+      </div>
+      <div class="app-container">
+
+        <img class="youtube-apps-icon" src="icons/youtube-apps.svg">
+        <div class="tooltip">YouTube Apps</div>
+      </div>
+      
+      
+      <div class="notifications-icon-container">
+        <div class="noti">
+          <img class="notifications-icon" src="icons/notifications.svg">
+          <div class="tooltip">Notifications</div>
+        </div>
+       
+        <div class="notifications-count">3</div>
+      </div>
+     
+      <img class="current-user-icon" src="channel-pics/profile pic.jpg">
+    </div>
+      
+    </div>
+    <div class="sidebar">
+      <div class="sidebar-link">
+        <img src="icons/home.svg">
+        <diV>Home</diV>
+      </div>
+      <div class="sidebar-link">
+        <img src="icons/explore.svg">
+        <diV>Explore</diV>
+      </div>
+      <div class="sidebar-link">
+        <img src="icons/subscriptions.svg">
+        <diV>Subscriptions</diV>
+      </div>
+      <div class="sidebar-link">
+        <img src="icons/originals.svg">
+        <diV>Originals</diV>
+      </div>
+      <div class="sidebar-link">
+        <img src="icons/youtube-music.svg">
+        <diV>YouTube Music</diV>
+      </div>
+      <div class="sidebar-link">
+        <img src="icons/library.svg"> 
+        <diV>Library</diV>
+      </div>
+    </div>
+    
+  <div class="video-grid">
+    <div class="video-preview">
+      <div class="thumbnail-row">
+        <img class = "thumbnail" src="thumbnails/hq720 (1).webp">
+        <div class="video-time">48:50</div>
+      </div>
+      <div  class="video-info-grid">
+      
+        <div class="channel-picture">
+          <img class="profile-pic" src="channel-pics/channels4_profile.jpg">
+        </div>
+        <div class="video-info">
+          <p class="video-title">
+  
+            Shark tank season 3
+          </p>
+          <p class="video-author">
+            Sony India
+          </p>
+          <p class="video-stats">
+            376K views &#183; 12 hours ago
+          </p>
+
+        </div>  
+        
+        
+      </div>
+    </div>
+     
+
+    
+  <div class="video-preview">
+    <div class="thumbnail-row">
+          <img class = "thumbnail" src="thumbnails/hq720.webp">
+          <div class="video-time">11:47</div>
+    </div>
+      <div class="video-info-grid">
+          <div class="channel-picture">
+            <img class="profile-pic" src="channel-pics/channels4_profile2.jpg">
+          </div>
+          <div class="video-info">
+            <p class="video-title">
+    
+              Virat and KL bashes pak out of the Asia Cup
+            </p>
+            <p class="video-author">
+              Asian Cricket Council
+            </p>
+            <p class="video-stats">
+              44M views &#183; 5 months ago
+            </p>
+       </div>
+      </div>
+  </div>
+          
+          
+        
+   <div class="video-preview">
+          <div class="thumbnail-row">
+            <img class = "thumbnail" src="thumbnails/hq7203.webp">
+            <div class="video-time">17:57</div>
+          </div>
+          <div  class="video-info-grid">
+          
+            <div class="channel-picture">
+              <img class="profile-pic" src="channel-pics/channels4_profile3.jpg">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+      
+                Baki vs Yujiro full fight
+              </p>
+              <p class="video-author">
+                Masterpiece Scene
+              </p>
+              <p class="video-stats">
+                6.8M views &#183; 5 months ago
+              </p>
+            </div>
+          </div>
+            
+            
+          </div>
+   
+        
+  <div class="video-preview">
+            <div class="thumbnail-row">
+              <img class = "thumbnail" src="thumbnails/hq72054.webp">
+              <div class="video-time">14:28</div>
+            </div>
+            <div class="video-info-grid">
+              <div class="channel-picture">
+                <img class="profile-pic" src="channel-pics/logo.jpg">
+              </div>
+              <div class="video-info">
+                <p class="video-title">
+                  Medieval Battle
+                  
+                </p>
+                <p class="video-author">
+                  Dude Perfect
+                </p>
+                <p class="video-stats">
+                  2.9M views &#183; 12 days ago
+                </p>
+    </div>
+            </div>
+              
+              
+            </div>
+    <div class="video-preview">
+              <div class="thumbnail-row">
+                <img class = "thumbnail" src="thumbnails/hq7205.webp">
+                <div class="video-time">21:55</div>
+              </div>
+              <div  class="video-info-grid">
+              
+                <div class="channel-picture">
+                  <img class="profile-pic" src="channel-pics/unnamed.jpg">
+                </div>
+                <div class="video-info">
+                  <p class="video-title">
+          
+                    Back Workout
+                  </p>
+                  <p class="video-author">
+                    Chris Bumstead
+                  </p>
+                  <p class="video-stats">
+                    88K views &#183; 8 hours ago
+                  </p>
+                </div>
+                
+                
+     </div>
+    </div>
+            
+  <div class="video-preview">
+                <div class="thumbnail-row">
+                  <img class = "thumbnail" src="thumbnails/hq7206.webp">
+                  <div class="video-time">12:31</div>
+                </div>
+                <div class="video-info-grid">
+                  <div class="channel-picture">
+                    <img class="profile-pic" src="channel-pics/channels4_profile6.jpg">
+                  </div>
+                  <div class="video-info">
+                    <p class="video-title">
+            
+                      I Experienced worst injury for a day!
+                    </p>
+                    <p class="video-author">
+                      Browney
+                    </p>
+                    <p class="video-stats">
+                      4.5M views &#183; 9 months ago
+                    </p>
+                  </div>
+                  
+                  
+    </div>
+  </div>
+  
+  </body>
+
+
+
+
+</html>
